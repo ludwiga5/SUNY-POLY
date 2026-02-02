@@ -1,0 +1,26 @@
+Abstraction Heierarchy
+
+1. Application                     -   a.exe
+
+2. Algorithm                       -   function
+
+3. Programming Language            -   compilation_lab.c
+    a. Preprocessing
+        - C Preprocessor (CPP) formats the source 
+        code using macros like #include or #define
+        - "-E" flag Preprocess Only
+
+4. Assembly                        -    compilation.s
+    b. Compilation
+        - translates C source code into Assembly
+        - "-S" flag Compile Only
+
+5. Instruction Set Architecture    -    machine code.o / .obj
+    c. Assemble
+        - labeling assembly to binary machine code
+        - "-c" flag Assemble Only
+        - xxd command to view hexademial instructions
+
+d. Linking
+    - orders object files properly and combines them 
+    into a single .exe file 

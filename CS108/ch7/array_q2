@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+
+int main(void){
+
+
+int array[15] = {8, 53, 32, 54, 74, 3, 7, 18, 28, 37, 42, 42, 89, 12, 3};
+int get_min_range(int [], int, int);
+int lowest_subscript = get_min_range(array, 0, 14);
+
+printf("\nThe subscript of the minimum value is %d\n", lowest_subscript);
+
+
+return 0;
+}
+
+
+int get_min_range(int arr[], int firstsub, int lastsub){
+
+int temp_min=1000000000;
+int minsub;
+
+for(int i=firstsub; i<=lastsub; i++){
+
+	if (arr[i]<temp_min){
+		temp_min=arr[i];
+		minsub=i;
+	}
+}
+return minsub;
+
+}

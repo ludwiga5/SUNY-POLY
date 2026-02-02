@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+int main (void){
+
+
+int recurs(int);
+
+
+
+int recurs(int a){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+return 0;
+}

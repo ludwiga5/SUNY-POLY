@@ -4,16 +4,23 @@
      3) call a function that searches the array for the target value
            calculates true if it is found, false otherwise
     Written by Alex Ludwig
-    Language: C++ Mac Terminal g++ compiler
+    Language: C++, g++ compiler
     January 2026
 */
 
 #include <iostream>
 using namespace std;
 
-//Prototype
+//Definitions
+#define size_of_array 7
+
+//Prototypes
 bool find_it(int[], int);
 
+/*
+Gathers user input and calls find_it
+Prints whether or not the target value was found
+*/
 int main(void){
 
     int a[]={16, 9, 45, 23, 19, 43, 22};
@@ -29,10 +36,12 @@ int main(void){
     return 0;
 }
 
+/*
+Parses the array and checks each index for the target value
+*/
 bool find_it(int array[], int target){
 
-    //Parses the array and checks each index for the target value
-    for(int i=0; i<sizeof(array); i++){
+    for(int i=0; i<size_of_array; i++){
         if (array[i]==target)
             return true;
     }

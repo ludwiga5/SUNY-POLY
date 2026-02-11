@@ -3,31 +3,33 @@ using namespace std;
 
 int main(void){
 
-    int a[15];
-    int *b;
-    b=a;
+    int array_length, *arrayPtr1, *arrayPtr2;
 
-    cout<<"The value of a is "<<a<<endl;
-    cout<<"The value of b is "<<a<<endl;
+    cout<<"How long should the array be?"<<endl;
+    cin>>array_length;
 
-    //fill and print a
-    for(int i=0; i<15; i++){
+    //nothrow prevents a crash if the memory allocation failed and gives arrayPtr1 a value of 0
+    //Creates and stores with memory from the Heap
+    arrayPtr1 = new (nothrow)int[array_length];
 
-        a[i] = i*2;
-        cout<<a[i]<<"   ";
+    if(arrayPtr1 == 0)
+        cout<<"Cannot Create Array"<<endl;
+    
+    else{
+
+        cout<<"Array successfully created"<<endl;
+        cout<<"Array starts at address: "<<arrayPtr1<<endl;
+
+        for (int i=0; i<array_length; i++){
+            arrayPtr1[i] = i*2;
+            cout<<arrayPtr1[i]<<endl;
+        }
+
+        cout<<"Deleting array"<<endl;
+
+        //Returns memory space back to the heap
+        delete [] arrayPtr1;
 
     }
-    cout<<endl;
-    //Value of b
-    for(int i=0; i<15; i++){
-
-        cout<<b<<"   "<<*b<<endl;
-        b++;
-
-    }
-
-
-
-    return 0;
 
 }

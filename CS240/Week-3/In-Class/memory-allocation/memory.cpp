@@ -63,9 +63,11 @@ int main(void){
     I_ptr3++;
     cout<<"I_ptr3 after incrementing = "<<I_ptr3<<" and the value stored is "<<*I_ptr3<<endl;
 
-    //Allocates memory at runtime
-
-    //Grabs memory from "the heap"
+    /*
+    Allocates memory at runtime
+    Grabs memory from "the heap"
+    Only accesible through the pointer (Anonymous Variable)
+    */
     I_ptr4 = new int;
     cout<<"I_ptr4 = "<<I_ptr4<<endl;
     *I_ptr4 = x+3; // (6)

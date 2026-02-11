@@ -24,12 +24,14 @@ int main (void){
     int matrix[7][7];
     int size;
 
-    cout<<"Input an length 3, 5, or 7 to create a magic square"<<endl;
+    cout<<"Input a length 3, 5, or 7 to create a magic square"<<endl;
     cin>>size;
 
     fillZeroes(matrix, size);
     magicSquare(matrix, size);
     printIt(matrix, size);
+
+    return 0;
 
 /*
 Fills the matrix with n x n sized magic square 
@@ -69,12 +71,12 @@ Compiler: g++ Apple clang version 17.0.0 (clang-1700.4.4.1)
         else    
             next_c = c+1;
 
-        //Checks for if the space is taken
+        //checks for if the space is taken & goes down a row if it is
         if(mat[next_r][next_c]!=0){
 
             r++;
 
-        //After establishing correct next placement, set {r,c} = {next_r, next_c}
+        //if space is free, assign new location indicies
         } else{
 
             r = next_r;
@@ -108,8 +110,11 @@ Compiler: g++ Apple clang version 17.0.0 (clang-1700.4.4.1)
 
 
 /*
-Fills the array with 0s to avoid comparing 
+Fills the array with 0s to avoid comparing to
 garbage values from the compiler in magicSquare
+
+In testing, unassigned indicies held values of {0, 1, 1849380ish}
+requiring the use of this support function for consistency.
 
 Written by Alex Ludwig
 Language: C++
@@ -120,7 +125,6 @@ Compiler: g++ Apple clang version 17.0.0 (clang-1700.4.4.1)
     for(int r=0; r<size; r++)
         for(int c=0; c<size; c++)
             mat[r][c] = 0;
-        
     
 }
 

@@ -11,8 +11,7 @@ using namespace std;
 /*** Utility Functions -- Prototypes ***/
 
 int toMilitary(unsigned hours, unsigned minutes, char am_pm);
-void toStandard(unsigned military,
-                unsigned & hours, unsigned & minutes, char & AMPM);
+void toStandard(unsigned military, unsigned & hours, unsigned & minutes, char & AMPM);
 //----- Definition of default constructor
 Time::Time() 
   : myHours(12), myMinutes(0), myAMorPM('A'), myMilTime(0)

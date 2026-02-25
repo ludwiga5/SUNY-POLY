@@ -5,10 +5,7 @@ using namespace std;
 
 int main (void){
 
-
     string str;
-
-    //boolalpha prints true or false instead of 1 or 0
     cout<<"str is empty "<<boolalpha<<str.empty()<<endl;
     cout<<"the number of characters in str is "<<str.size()<<endl;
     cout<<"the capacity of str is "<<str.capacity()<<endl;

@@ -152,8 +152,8 @@ void extract_bit_plane(
     /*
     Then Give the value of a bit at $bit_position assignes a pixel value for output_file
     */
-    for(int y=0; y<256; y++){
-        for(int x=0; x<256; x++){
+    for(int y=0; y<height; y++){
+        for(int x=0; x<width; x++){
 
             unsigned char pixel = fgetc(input);
             pixel = pixel >> bit_position;

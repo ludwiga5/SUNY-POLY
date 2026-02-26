@@ -24,7 +24,7 @@ int main(void){
 
     generate_random_noise_bw("section-1_pics/random_noise_bw.pgm", WIDTH, HEIGHT);
     generate_random_noise_grey("section-1_pics/random_noise_grey.pgm", WIDTH, HEIGHT);
-    extract_bit_plane("pgm_input_image.pgm", "section-1_pics/pgm_output_image0.pgm", BITPLANE, WIDTH, HEIGHT);
+    extract_bit_plane("pgm_input_image.pgm", "section-1_pics/pgm_output_image0.pgm", BITPLANE);
     generate_xor_pattern("section-1_pics/xor_pattern.pgm", WIDTH, HEIGHT);
     generate_and_pattern("section-1_pics/and_pattern.pgm", WIDTH, HEIGHT);
     generate_or_pattern("section-1_pics/or_pattern.pgm", WIDTH, HEIGHT);

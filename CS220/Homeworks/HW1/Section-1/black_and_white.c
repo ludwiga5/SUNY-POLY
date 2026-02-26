@@ -15,10 +15,10 @@ Target: arm64-apple-darwin24.6.0
 #include <time.h>
 
 
-//  Prototypes
+//Prototypes
 void generate_random_noise_bw(const char* filename, int width, int height);
 void generate_random_noise_grey(const char* filename, int width, int height);
-void extract_bit_plane(const char* input_file, const char* output_file, int bit_position, int width, int height);
+void extract_bit_plane(const char* input_file, const char* output_file, int bit_position);
 void generate_xor_pattern(const char* filename, int width, int height);
 void generate_and_pattern(const char* filename, int width, int height);
 void generate_or_pattern(const char* filename, int width, int height);
@@ -32,7 +32,6 @@ void generate_random_noise_bw(const char* filename, int width, int height){
     /*
     Open {filename} to write
     In binary mode - "wb"
-    Return if error occurs
     */
     FILE *file = fopen(filename, "wb");
     if (!file) {
@@ -54,13 +53,11 @@ void generate_random_noise_bw(const char* filename, int width, int height){
     int ran_bin;
     srand(time(NULL));
     for(int i = 0; i<height*width; i++){
-        ran_bin = ((rand() % 0b10)+0)*0xFF;
+        ran_bin = (rand() % 0b10)*0xFF;
         fwrite(&ran_bin, 1, 1, file);
     }
 
-    /*
-    Closing the Barn Door behind me
-    */
+
     fclose(file);
     printf("Created %s (%dx%d)\n", filename, width, height);
     
@@ -71,7 +68,6 @@ void generate_random_noise_bw(const char* filename, int width, int height){
     /*
     Open {filename} to write
     In binary mode - "wb"
-    Return if error occurs
     */
     FILE *file = fopen(filename, "wb");
     if (!file) {
@@ -88,7 +84,7 @@ void generate_random_noise_bw(const char* filename, int width, int height){
 
     /*
     Random number (0-255) for black & white
-    Loops height*width number of times to fill output
+    Loops height*width number of times to fill 
     */
     int ran_bin;
     srand(time(NULL));
@@ -97,9 +93,6 @@ void generate_random_noise_bw(const char* filename, int width, int height){
         fwrite(&ran_bin, 1, 1, file);
     }
 
-    /*
-    Closing the Barn Door behind me
-    */
     fclose(file);
     printf("Created %s (%dx%d)\n", filename, width, height);
     
@@ -111,17 +104,14 @@ void generate_random_noise_bw(const char* filename, int width, int height){
 Task 2
 Bit-Plane Extraction
 */
-void extract_bit_plane(
-    const char* input_file, const char* output_file, 
-    int bit_position,
-    int height, int width){
+void extract_bit_plane(const char* input_file, const char* output_file, int bit_position){
 
+    int height, width;
     /*
     Open {input_file} to read
     In binary mode - "rb"
     Open {output_file} to write
     In binary mode - "wb"
-    Return if error occurs
     */
     FILE *input = fopen(input_file, "rb");
     if (!input) {
@@ -131,10 +121,9 @@ void extract_bit_plane(
     FILE *output = fopen(output_file, "wb");
     if (!output) {
         printf("Error opening file: %s!\n", output_file);
+        fclose(input);
         return;
     }
-
-
 
     /*
     Run an input file to "Read" and ignore header information from input files
@@ -167,8 +156,11 @@ void extract_bit_plane(
 
 
     fclose(input);
-    printf("Created %s %d %d", output_file, 256, 256);
     fclose(output);
+    printf("Created %s %d %d", output_file, 256, 256);
+
+    return;
+    
 }
 
 /*
@@ -180,7 +172,6 @@ void generate_xor_pattern(const char* filename, int width, int height){
     /*
     Open {filename} to write
     In binary mode - "wb"
-    Return if error occurs
     */
     FILE *file = fopen(filename, "wb");
     if (!file) {
@@ -207,9 +198,6 @@ void generate_xor_pattern(const char* filename, int width, int height){
         }
     }
 
-    /*
-    Closing the Barn Door behind me
-    */
     fclose(file);
     printf("Created %s (%dx%d)\n", filename, width, height);
     
@@ -220,7 +208,6 @@ void generate_xor_pattern(const char* filename, int width, int height){
     /*
     Open {filename} to write
     In binary mode - "wb"
-    Return if error occurs
     */
     FILE *file = fopen(filename, "wb");
     if (!file) {
@@ -236,7 +223,7 @@ void generate_xor_pattern(const char* filename, int width, int height){
     fprintf(file, "P5\n%d %d\n255\n", width, height);
 
     /*
-    Assigns each pixel x xor y value
+    Assigns each pixel x and y value
     */
     for(int y = 0; y<height; y++){
         for(int x=0; x<width; x++){
@@ -247,9 +234,6 @@ void generate_xor_pattern(const char* filename, int width, int height){
         }
     }
 
-    /*
-    Closing the Barn Door behind me
-    */
     fclose(file);
     printf("Created %s (%dx%d)\n", filename, width, height);
     
@@ -276,7 +260,7 @@ void generate_xor_pattern(const char* filename, int width, int height){
     fprintf(file, "P5\n%d %d\n255\n", width, height);
 
     /*
-    Assigns each pixel x xor y value
+    Assigns each pixel x or y value
     */
     for(int y = 0; y<height; y++){
         for(int x=0; x<width; x++){
@@ -287,9 +271,6 @@ void generate_xor_pattern(const char* filename, int width, int height){
         }
     }
 
-    /*
-    Closing the Barn Door behind me
-    */
     fclose(file);
     printf("Created %s (%dx%d)\n", filename, width, height);
     

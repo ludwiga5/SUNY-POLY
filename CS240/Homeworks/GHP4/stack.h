@@ -55,7 +55,7 @@ class Stack
          terminated.
    -----------------------------------------------------------------------*/
 
-  void display(std::ostream & out) const;
+  void display(ostream & out) const;
   /*------------------------------------------------------------------------
     Display values stored in the stack. 
 

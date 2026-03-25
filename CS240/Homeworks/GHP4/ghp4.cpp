@@ -20,12 +20,13 @@ Compiler: g++ Apple clang version 17.0.0 (clang-1700.4.4.1)
 */
 
 #include <iostream>
+
+using namespace std;
+
 #include "stack.h"
 
 //used throughout the program as the size of eack stack
 #define LENGTH 6
-
-using namespace std;
 
 //prototypes
 bool compareStacks(Stack, Stack);

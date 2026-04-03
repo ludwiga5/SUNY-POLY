@@ -49,3 +49,61 @@ int xnor(int a, int b)
 	int initialXOR = xor(a, b);
 	return nand(initialXOR, initialXOR);
 }
+
+//Bitwise Functions
+
+uint8_t bitwise_nand(uint8_t a, uint8_t b) {
+    int b0 = nand(and(a >> 0, 1), and(b >> 0, 1));
+    int b1 = nand(and(a >> 1, 1), and(b >> 1, 1));
+    int b2 = nand(and(a >> 2, 1), and(b >> 2, 1));
+    int b3 = nand(and(a >> 3, 1), and(b >> 3, 1));
+    return (b3 << 3) + (b2 << 2) + (b1 << 1) + b0;
+}
+
+uint8_t bitwise_not(uint8_t a) {
+    int b0 = not(and(a >> 0, 1));
+    int b1 = not(and(a >> 1, 1));
+    int b2 = not(and(a >> 2, 1));
+    int b3 = not(and(a >> 3, 1));
+    return (b3 << 3) + (b2 << 2) + (b1 << 1) + b0;
+}
+
+uint8_t bitwise_and(uint8_t a, uint8_t b) {
+    int b0 = and(and(a >> 0, 1), and(b >> 0, 1));
+    int b1 = and(and(a >> 1, 1), and(b >> 1, 1));
+    int b2 = and(and(a >> 2, 1), and(b >> 2, 1));
+    int b3 = and(and(a >> 3, 1), and(b >> 3, 1));
+    return (b3 << 3) + (b2 << 2) + (b1 << 1) + b0;
+}
+
+uint8_t bitwise_or(uint8_t a, uint8_t b) {
+    int b0 = or(and(a >> 0, 1), and(b >> 0, 1));
+    int b1 = or(and(a >> 1, 1), and(b >> 1, 1));
+    int b2 = or(and(a >> 2, 1), and(b >> 2, 1));
+    int b3 = or(and(a >> 3, 1), and(b >> 3, 1));
+    return (b3 << 3) + (b2 << 2) + (b1 << 1) + b0;
+}
+
+uint8_t bitwise_xor(uint8_t a, uint8_t b) {
+    int b0 = xor(and(a >> 0, 1), and(b >> 0, 1));
+    int b1 = xor(and(a >> 1, 1), and(b >> 1, 1));
+    int b2 = xor(and(a >> 2, 1), and(b >> 2, 1));
+    int b3 = xor(and(a >> 3, 1), and(b >> 3, 1));
+    return (b3 << 3) + (b2 << 2) + (b1 << 1) + b0;
+}
+
+uint8_t bitwise_nor(uint8_t a, uint8_t b) {
+    int b0 = nor(and(a >> 0, 1), and(b >> 0, 1));
+    int b1 = nor(and(a >> 1, 1), and(b >> 1, 1));
+    int b2 = nor(and(a >> 2, 1), and(b >> 2, 1));
+    int b3 = nor(and(a >> 3, 1), and(b >> 3, 1));
+    return (b3 << 3) + (b2 << 2) + (b1 << 1) + b0;
+}
+
+uint8_t bitwise_xnor(uint8_t a, uint8_t b) {
+    int b0 = xnor(and(a >> 0, 1), and(b >> 0, 1));
+    int b1 = xnor(and(a >> 1, 1), and(b >> 1, 1));
+    int b2 = xnor(and(a >> 2, 1), and(b >> 2, 1));
+    int b3 = xnor(and(a >> 3, 1), and(b >> 3, 1));
+    return (b3 << 3) + (b2 << 2) + (b1 << 1) + b0;
+}

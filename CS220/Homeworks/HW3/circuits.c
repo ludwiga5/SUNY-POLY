@@ -29,14 +29,14 @@ uint8_t ripple_add(uint8_t a, uint8_t b, int *overflow)
 {
     int s1, s2, s3, s4, C;
 	uint8_t sum = 0b0000;
-	full_adder((a>>0)&1, (b>>0)&1, 0, &s1, &C);
-	full_adder((a>>1)&1, (b>>1)&1, C, &s2, &C);
-	full_adder((a>>2)&1, (b>>2)&1, C, &s3, &C);
-	full_adder((a>>3)&1, (b>>3)&1, C, &s4, &C);
+	full_adder(and((a>>0), 1), and((b>>0), 1), 0, &s1, &C);
+	full_adder(and((a>>1), 1), and((b>>1), 1), C, &s2, &C);
+	full_adder(and((a>>2), 1), and((b>>2), 1), C, &s3, &C);
+	full_adder(and((a>>3), 1), and((b>>3), 1), C, &s4, &C);
 	*overflow = C;
-	sum |= (s1 << 0);
-	sum |= (s2 << 1);
-	sum |= (s3 << 2);
-	sum |= (s4 << 3);
+	sum = bitwise_or(sum, (s1 << 0));
+	sum = bitwise_or(sum, (s2 << 1));
+	sum = bitwise_or(sum, (s3 << 2));
+	sum = bitwise_or(sum, (s4 << 3));
 	return sum;
 }

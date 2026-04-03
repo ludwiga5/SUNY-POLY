@@ -20,6 +20,7 @@ Compiler: g++ Apple clang version 17.0.0 (clang-1700.4.4.1)
 */
 
 #include <iostream>
+#include <string>
 
 using namespace std;
 

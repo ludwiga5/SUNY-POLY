@@ -8,7 +8,6 @@ Apple clang version 17.0.0 (clang-1700.4.4.1)
 Target: arm64-apple-darwin24.6.0
 */
 #include "alu.h"
-#include "gates.c"
 
 void half_adder(int a, int b, int *sum, int *carry)
 {

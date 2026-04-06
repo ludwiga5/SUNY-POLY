@@ -17,6 +17,7 @@ Foundational programming concepts in C, covering:
 Image processing fundamentals using C:
 - **HW1 Section-1**: Black and white image manipulation (PGM format)
 - **HW1 Section-2**: Color image processing (PPM format)
+- **HW3**: Digital logic circuits and ALU simulation in C
 - Labs covering C compilation pipeline and review
 
 ### CS240 - Object-Oriented Programming
@@ -26,12 +27,16 @@ C++ programming and object-oriented design:
 - Dynamic arrays and data structures (Week 4)
 - Classes and object design (Week 5-6)
 - Linked lists and string handling (Week 6)
+- Queues and call center simulation (Week 7)
+- Vectors and Login Log example (Week 8)
+- Recursion (Week 9)
+- Palindrome and dictionary processing (GHP5)
 
 ## Structure
 
 ```
 ├── CS108/          # C programming fundamentals
-├── CS220/          # Image processing
+├── CS220/          # Computer Architecture & Digital Logic
 ├── CS240/          # C++ and OOP
 └── README.md       # This file
 ```
@@ -41,10 +46,11 @@ C++ programming and object-oriented design:
 - **C** - CS108, CS220
 - **C++** - CS240
 - **Compiler**: GCC/G++
+- **Last Updated:** April 2026
 
 ## Notes
 
 This repository contains academic coursework. Code is provided as-is for educational purposes.
 
 ---
-*Last Updated: February 2026*
+*Last Updated: April

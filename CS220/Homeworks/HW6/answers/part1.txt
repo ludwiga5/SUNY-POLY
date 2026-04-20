@@ -1,0 +1,25 @@
+1. What is the purpose of main.c? How do you use the executable that it makes?
+
+-   main.c is used to load a .tiny file, translate to machine code, load into the 
+    virtual CPU, and begins the emulation. Done by running the executable with a   
+    specified .tiny file in the CLI
+
+2. What is an assembler? Generally and in this context.
+
+-   An assembler is a progrm that translates assembly code into machine code
+    that a CPU can run. In this context, the assembler in main converts assembly in 
+    .tiny files into machine code for the tinyCPU emulator.
+
+3. After make tinyCPU is ran what happens?
+
+-   "make tinyCPU" compiles both main and tinycpu C files into a tinyCPU executable file,
+    which is capable of running .tiny files.
+
+4. What two files are your main concern according to code comments?
+
+-   tinycpu.h and tinycpu.c
+
+5. What is a .tiny file?
+
+-   A .tiny file is an assembly file for our custom cpu architecture. 
+    They are assembled and executed by the tinyCPU emulator.

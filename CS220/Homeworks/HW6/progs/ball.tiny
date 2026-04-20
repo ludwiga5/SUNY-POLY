@@ -1,0 +1,100 @@
+; ball.tiny — bouncing ball demo for tinyCPU
+; 
+; Register map:
+;   R0 = x position
+;   R1 = y position
+;   R2 = dx (1 = right, 255 = left)
+;   R3 = dy (1 = down, 255 = up)
+;   R4 = scratch for boundary checks
+;   R5 = constant 63 (screen edge)
+;   R7 = scratch for negation
+;
+; Flip trick: to negate dx or dy (toggle between 1 and 255),
+;   use  LDI R7 0 / SUB R7 Rn  which gives 0 - Rn mod 256.
+;   dx=1  → 255 ✓     dx=255 → 1 ✓
+;
+; Instruction count and jump targets:
+;   0  LDI 0 32      init
+;   1  LDI 1 32
+;   2  LDI 2 1
+;   3  LDI 3 1
+;   4  LDI 5 63
+;
+;   5  DRAWOFF 0 1   ← loop start (jump target = 5)
+;   6  ADD 0 2
+;   7  ADD 1 3
+;
+;   8  MOV 4 0       x == 63?
+;   9  SUB 4 5
+;  10  JZ 4 13
+;
+;  11  JZ 0 13       x == 0?
+;
+;  12  JMP 16        skip x-flip
+;
+;  13  LDI 7 0       flip dx
+;  14  SUB 7 2
+;  15  MOV 2 7
+;
+;  16  MOV 4 1       y == 63?
+;  17  SUB 4 5
+;  18  JZ 4 21
+;
+;  19  JZ 1 21       y == 0?
+;
+;  20  JMP 24        skip y-flip
+;
+;  21  LDI 7 0       flip dy
+;  22  SUB 7 3
+;  23  MOV 3 7
+;
+;  24  DRAW 0 1      draw new pixel
+;  25  JMP 5         loop back
+;
+;  26  HALT 0 0      (unreachable, but tidy)
+
+; --- init ---
+LDI 0 32    ; 0  R0 = 32 (x start, center-ish)
+LDI 1 32    ; 1  R1 = 32 (y start, center-ish)
+LDI 2 1     ; 2  R2 = 1  (dx, moving right)
+LDI 3 1     ; 3  R3 = 1  (dy, moving down)
+LDI 5 63    ; 4  R5 = 63 (boundary constant)
+
+; --- main loop (instr 5) ---
+DRAWOFF 0 1 ; 5  erase current pixel
+ADD 0 2     ; 6  x += dx
+ADD 1 3     ; 7  y += dy
+
+; x boundary check
+MOV 4 0     ; 8  R4 = x
+SUB 4 5     ; 9  R4 = x - 63
+JZ 4 13     ; 10 if x == 63, jump to flip dx
+
+JZ 0 13     ; 11 if x == 0, jump to flip dx
+
+JMP 16      ; 12 no x flip, skip to y checks
+
+; flip dx (instr 13)
+LDI 7 0     ; 13 R7 = 0
+SUB 7 2     ; 14 R7 = 0 - dx  (negate mod 256)
+MOV 2 7     ; 15 dx = R7
+
+; y boundary check (instr 16)
+MOV 4 1     ; 16 R4 = y
+SUB 4 5     ; 17 R4 = y - 63
+JZ 4 21     ; 18 if y == 63, jump to flip dy
+
+JZ 1 21     ; 19 if y == 0, jump to flip dy
+
+JMP 24      ; 20 no y flip, skip to draw
+
+; flip dy (instr 21)
+LDI 7 0     ; 21 R7 = 0
+SUB 7 3     ; 22 R7 = 0 - dy  (negate mod 256)
+MOV 3 7     ; 23 dy = R7
+
+; draw and loop (instr 24)
+DRAW 0 1    ; 24 draw pixel at (x, y)
+JMP 5       ; 25 jump back to loop start
+
+HALT 0 0    ; 26 unreachable, included for cleanliness

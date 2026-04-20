@@ -1,0 +1,67 @@
+; init
+LDI 0 32  	; 0 center x
+LDI 1 32  	; 1 center y
+LDI 2 2   	; 2 seg length
+LDI 3 0   	; 3 seg counter
+LDI 4 1   	; 4 increment
+LDI 5 0   	; 5 direction
+
+; outer loop
+LDI 3 0		; 6
+MOV 6 2 	; 7
+
+; step
+DRAW 0 1 	; 8
+ADD 3 4 	; 9
+SUB 6 4 	; 10
+
+; dirs
+; right
+JNZ 5 14	; 11 if dir != 0 skip right move; goto down 
+ADD 0 4		; 12
+JMP 32 0 	; 13 jmp end of move
+
+; down
+LDI 7 1 	; 14
+MOV 8 5 	; 15
+SUB 8 7 	; 16
+JNZ 8 20	; 17 if dir != 1 skip down move; goto left
+ADD 1 4 	; 18
+JMP 32  0 	; 19 jmp end of move
+
+; left
+LDI 7 2 	; 20
+MOV 8 5 	; 21
+SUB 8 7 	; 22
+JNZ 8 26	; 23 if dir != 2 skip left move; goto up
+SUB 0 4   	; 24
+JMP 32 0 	; 25 jmp end of move
+
+; up
+LDI 7 3 	; 26
+MOV 8 5 	; 27
+SUB 8 7 	; 28
+JNZ 8 32	; 29 if dir != 3 skip down move; goto end
+SUB 1 4 	; 30
+JMP 32 0 	; 31 jmp end of move
+
+JNZ 6 8		; 32 jmp to step while R6 != 0
+
+; change dir
+ADD 5 4		; 33 dir++
+LDI 6 4 	; 34 set max dir = 4
+SUB 6 5		; 35 R6 = 4 - dir
+JNZ	6 38	; 36 if R6 != 0 skip dir reset
+LDI 5 0 	; 37 if dir == 4 reset back to 0
+
+; grow length every 2 turns
+XOR 9 4 	; 38
+JNZ 9 42	; 39 skip growth on odd turn
+LDI 10 3 	; 40 spacing
+ADD 2 10 	; 41
+
+; check bounds
+LDI 6 63 	; 42
+SUB 6 0 	; 43
+JNZ 6 6		; 44 jmp puter 
+HALT 		; 45

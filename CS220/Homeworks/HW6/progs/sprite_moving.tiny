@@ -1,0 +1,132 @@
+LDI 0 0 	; 0 R0 = sprite_x = 0
+LDI 1 0 	; 1 R1 = sprite_y = 0
+LDI 2 1 	; 2 R2 = increment
+LDI 3 8 	; 3 R3 = boundary = 8
+LDI 4 117	; 4 R4 = sprite pix location = start of data block address
+LDI 15 0 	; 5 R15 = Draw
+LDI 14 0 	; 6
+
+; FOR y = 0, WHILE y != 8
+MOV 5 1 	; 7 load y into loop check
+SUB 5 3 	; 8 R5 = y - 8
+JZ 5 28		; 9 if (y == 8) jump to halt
+	
+	LDI 0 0 	; 10  x = 0
+
+	; FOR x = 0, WHILE x != 8
+	MOV 6 0 	; 11 load x into loop check
+	SUB 6 3 	; 12 R3 = x - 8
+	JZ 6 26		; 13 if (x == 8) jump to end of x loop
+
+		; get the pix info from proper pix location
+		MOV 13 15	; 14
+		MOV 12 14 	; 15
+		ADD 13 0 	; 16
+		ADD 12 1 	; 17
+
+		LD 7 4 		; 18 
+		JZ 7 21 	; 19
+		DRAW 13 12 	; 20
+		JMP 23 0	; 21
+		DRAWOFF 13 12 ; 22
+
+		ADD 4 2 	; 23
+		; x++
+		ADD 0 2 	; 24
+
+	;END FOR
+	JMP 11 			; 25
+
+	; y++
+	ADD 1 2 		; 26
+
+;END FOR
+JMP 7 				; 27
+
+LDI 8 63
+
+CLEAR 0
+
+ADD 15 2
+ADD 14 2
+AND 15 8
+AND 14 8
+LDI 0 0
+LDI 1 0
+LDI 4 117
+JMP 7
+
+HALT 0 0 			; 28
+
+DATA 				; 29
+DB 0
+DB 0
+DB 0
+DB 0
+DB 0
+DB 0
+DB 0
+DB 0
+
+DB 0
+DB 1
+DB 1
+DB 0
+DB 0
+DB 1
+DB 1
+DB 0
+
+DB 0
+DB 1
+DB 1
+DB 0
+DB 0
+DB 1
+DB 1
+DB 0
+
+DB 0
+DB 0
+DB 0
+DB 0
+DB 0
+DB 0
+DB 0
+DB 0
+
+DB 0
+DB 0
+DB 0
+DB 0
+DB 0
+DB 0
+DB 0
+DB 0
+
+DB 1
+DB 0
+DB 0
+DB 0
+DB 0
+DB 0
+DB 0
+DB 1
+
+DB 0
+DB 1
+DB 1
+DB 1
+DB 1
+DB 1
+DB 1
+DB 0
+
+DB 0
+DB 0
+DB 0
+DB 0
+DB 0
+DB 0
+DB 0
+DB 0

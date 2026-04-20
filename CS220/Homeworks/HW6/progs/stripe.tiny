@@ -1,0 +1,14 @@
+LDI 0 0     ; 0  x = 0
+LDI 1 0     ; 1  y = 0 
+LDI 2 1     ; 2  increment = 1
+LDI 3 63    ; 3  limit = 63
+
+; DO
+ADD 0 2     ; 4  x += 1
+DRAW 0 1    ; 5  draw pixel at new x
+; WHILE (x != 63)
+MOV 4 3     ; 6  R4 = 63
+SUB 4 0     ; 7  R4 = 63 - x
+JNZ 4 4     ; 8  If x != 63, aka if not at edge, loop back
+
+HALT 0 0    ; 9

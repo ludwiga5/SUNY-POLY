@@ -29,7 +29,7 @@ typedef struct tinyCPU {
 	bool halted;			//Halt flag
 	bool needs_render; 		//Render flag
 
-	uint8_t screen[H][W] 	//2D Screen Buffer
+	uint8_t screen[H][W]; 	//2D Screen Buffer
 } tinyCPU;
 
 uint8_t alu_compute(Op op, uint8_t a, uint8_t b);

@@ -3,11 +3,13 @@
 
 // tinyCPU Startup Function
 // Set all memory of the cpu struct to 0 
+// ============== YOU DO THIS ==============
 void cpu_init(tinyCPU* cpu) {
 	memset(cpu, 0, sizeof(*cpu));
 }
 
 // Load the program into the tinyCPU memory starting at memory address 0
+// ============== YOU DO THIS ==============
 void cpu_load(tinyCPU* cpu, uint8_t* prog, size_t len) {
 	for(int i=0; i<len; i++)
 		cpu->mem[i] = prog[i];
@@ -26,6 +28,7 @@ void cpu_fetch(tinyCPU* cpu) {
 
 // tinyCPU "ALU" function
 // Takes the place of an ALU make at the circuit level
+// ============== YOU DO THIS ==============
 uint8_t alu_compute(Op op, uint8_t a, uint8_t b)
 {
 	switch(op){
@@ -143,43 +146,44 @@ void cpu_decode_execute(tinyCPU *cpu) {
 // RENDER FUNCTIONS DO NOT TOUCH
 // READ AT YOUR PLEASURE
 
-void cpu_render_rgfw(tinyCPU* cpu, RGFW_window* win, RGFW_surface* surface) {
-	u8* buf = surface->data;
-	int scale = 8;
+// Mac Version
 
-	memset(buf, 0, W * scale * H * scale * 4);
+void cpu_render_rgfw(tinyCPU* cpu, RGFW_window* win, RGFW_surface* surface) {
+    u8* buf = surface->data;
+    memset(buf, 0, surface->w * surface->h * 4);
 
 	for (int y = 0; y < H; y++) {
 		for (int x = 0; x < W; x++) {
 			if (!cpu->screen[y][x]) continue;
-				for (int py = 0; py < scale; py++) {
-					for (int px = 0; px < scale; px++) {
-						int bx = x * scale + px;
-						int by = y * scale + py;
-						int idx = (by * W * scale + bx) * 4;
-						buf[idx + 0] = 255;
-						buf[idx + 1] = 255;
-						buf[idx + 2] = 255;
-						buf[idx + 3] = 255;
+				for (int py = 0; py < PIXEL_SCALE*PIXEL_RATIO; py++) {
+					for (int px = 0; px < PIXEL_SCALE*PIXEL_RATIO; px++) {
+						int bx = x * PIXEL_SCALE*PIXEL_RATIO + px;
+						int by = y * PIXEL_SCALE*PIXEL_RATIO + py;
+						int idx = (by * surface->w + bx) * 4;
+						buf[idx + 0] = 0; // Standard=255 / Mac=0
+						buf[idx + 1] = 0; // for idx 0-2
+						buf[idx + 2] = 0;
+						buf[idx + 3] = 255; //leave 255
 					}
 				}
 			}
 		}
 
-		RGFW_window_blitSurface(win, surface);
+	RGFW_window_blitSurface(win, surface);
 }
 
+// Graphics stuff
 void cpu_run(tinyCPU* cpu, int frame_delay_ms) {
-	// Graphics stuff
+
 	// Creating the window
-	RGFW_window* win = RGFW_createWindow("tinyCPU", 0, 0, W*8, H*8, RGFW_windowCenter);
-	u8* buffer = malloc(W*8 * H*8 * 4);
-	RGFW_surface* surface = RGFW_createSurface(buffer, W*8, H*8, RGFW_formatRGBA8);
-	if (!surface) {
-		printf("Error: RGFW surface creation failed\n");
-		return;
-	}
-	RGFW_event event;
+	RGFW_window* win = RGFW_createWindow("tinyCPU", 0, 0, W * PIXEL_SCALE, H * PIXEL_SCALE, RGFW_windowCenter);
+	u8* buffer = malloc(W * PIXEL_SCALE * PIXEL_RATIO * H * PIXEL_SCALE * PIXEL_RATIO* 4);
+	RGFW_surface* surface = RGFW_window_createSurface(win, buffer, W * PIXEL_SCALE * PIXEL_RATIO, H * PIXEL_SCALE * PIXEL_RATIO, PIXEL_FORMAT);
+		if (!surface) {
+			printf("Error: RGFW surface creation failed\n");
+			return;
+		}
+		RGFW_event event;
 
 	// Check if current program has thrown a HALT opcode
 	// and that the PC doesn't go out of bounds
@@ -202,7 +206,8 @@ void cpu_run(tinyCPU* cpu, int frame_delay_ms) {
 		// Check if we need to render the screen
 		if (cpu->needs_render) {
 			cpu_render_rgfw(cpu, win, surface);
-			sleep(frame_delay_ms);
+			// suspends thread execution (in microseconds)
+			usleep(frame_delay_ms * 1000); // Non-UNIX Sleep(frame_delay_ms)
 		}
 	}
 
@@ -212,10 +217,11 @@ void cpu_run(tinyCPU* cpu, int frame_delay_ms) {
 		RGFW_event event;
 		RGFW_window_checkEvent(win, &event);
 		if (RGFW_window_shouldClose(win)) break;
-		sleep(frame_delay_ms);
+		usleep(frame_delay_ms * 1000);
 	}
 
 	done:
-		RGFW_surface_free(surface);
+		//release memory back to heap
+		RGFW_surface_free(surface); 
 		RGFW_window_close(win);
 }

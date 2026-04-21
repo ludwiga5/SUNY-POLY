@@ -6,6 +6,21 @@
 #include <string.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <unistd.h> // usleep() function to prevent window hanging
+
+#define PIXEL_SCALE 8 //Scale for graphics window
+
+// Mac OS Changes:
+// - Alex ludwig SP2026 
+
+// Rather than standard RGBA formatting per pixel, Mac uses BGRA
+// not that it matters in this case since we are not using color
+#define PIXEL_FORMAT RGFW_formatBGRA8   //Standard=RGBA8 / Mac=BGRA8
+
+// Mac "Retina" displays have double the data per pixel compared
+// to other screens. So each pixel requires quadrouple the malloc and 
+// quadrouple the data set in cpu_render_rgfw().
+#define PIXEL_RATIO 2  //Standard=1     / Mac=2
 
 #define W 64
 #define H 64

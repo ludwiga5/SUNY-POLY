@@ -1,19 +1,19 @@
 1. stripe.tiny
 
--   
+-   Fills the window with white horizontal stripes. Writing each one at a time from left to right, leaving a black row inbetween each.
 
 2. spiral.tiny
 
--   
+-   Starts at the middle of the window and workes outward making a black spiral shape through clockwise cycles.
 
 3. ball.tiny
 
--   
+-   A gray ball brounces between the top left and bottom right corner endlessly.
 
 4. sprite.tiny
 
--   
+-   Writes a smily face to the cneter of the screen
 
 5. sprite_moving.tiny
 
--   
+-   The smiley face shift down to the right starting at the top left. Writing to the screen, then removed, then rewritten again down to the left incrementally.

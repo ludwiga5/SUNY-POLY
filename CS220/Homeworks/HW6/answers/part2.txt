@@ -1,6 +1,6 @@
 1. stripe.tiny
 
--   Fills the window with white horizontal stripes. Writing each one at a time from left to right, leaving a black row inbetween each.
+-   Whites a horizontal stripe at the top of the window left to right.
 
 2. spiral.tiny
 

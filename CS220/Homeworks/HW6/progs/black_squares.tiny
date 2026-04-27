@@ -1,0 +1,40 @@
+CLEAR 1 0    ; 0  fill screen black
+LDI 2 1      ; 1  increment = 1
+LDI 3 2      ; 2  step = 2
+LDI 5 64     ; 3  R5 = 64 
+
+; --- Horizontal Stripes ---
+LDI 1 0      ; 4  y = 0
+
+; outer loop top 
+LDI 0 0      ; 5  x = 0  <-- outer loop jumps back here
+
+DRAWOFF 0 1  ; 6  turn off (x, y)
+ADD 0 2      ; 7  x += 1
+MOV 4 0      ; 8  R4 = x
+SUB 4 5      ; 9  R4 = x - 64
+JNZ 4 6      ; 10 inner loop
+
+ADD 1 3      ; 11 y += 2
+MOV 4 1      ; 12 R4 = y
+SUB 4 5      ; 13 R4 = y - 64
+JNZ 4 5      ; 14 outer loop 
+
+; --- Vertical Stripes ---
+LDI 0 0      ; 15 x = 0
+
+; outer loop top
+LDI 1 0      ; 16 y = 0  <-- outer loop jumps back here
+
+DRAWOFF 0 1  ; 17 turn off (x, y)
+ADD 1 2      ; 18 y += 1
+MOV 4 1      ; 19 R4 = y
+SUB 4 5      ; 20 R4 = y - 64
+JNZ 4 17     ; 21 inner loop
+
+ADD 0 3      ; 22 x += 2
+MOV 4 0      ; 23 R4 = x
+SUB 4 5      ; 24 R4 = x - 64
+JNZ 4 16     ; 25 outer loop 
+
+HALT 0 0     ; 26

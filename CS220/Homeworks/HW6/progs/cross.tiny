@@ -1,0 +1,28 @@
+CLEAR 1 0    ; 0  clear screen (all pixels off = black background)
+
+; --- Horizontal line ---
+LDI 0 0      ; 1  x = 0
+LDI 1 32     ; 2  y = 32
+LDI 2 1      ; 3  increment = 1
+
+; DO
+DRAWOFF 0 1     ; 4  draw pixel at (x, 32)
+ADD 0 2      ; 5  x += 1
+; WHILE (x != 64)
+MOV 4 0      ; 6  R4 = x
+LDI 5 64     ; 7  R5 = 64
+SUB 4 5      ; 8  R4 = x - 64
+JNZ 4 4      ; 9  if x != 64, 
+
+; --- Vertical line ---
+LDI 0 32     ; 10  x = 32
+LDI 1 0      ; 11  y = 0
+
+; DO
+DRAWOFF 0 1     ; 12 
+ADD 1 2      ; 13  y += 1
+MOV 4 1      ; 14  R4 = y
+SUB 4 5      ; 15  R4 = y - 64
+JNZ 4 12     ; 16  if y != 64,
+
+HALT 0 0     ; 17

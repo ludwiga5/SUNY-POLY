@@ -64,7 +64,7 @@ class HashTable{
         void display(void){
             cout<<"Displaying Hash Table..."<<endl;
             for(int i=0; i<size; i++)
-                cout<<values[i]<<" ";
+                cout<<i<<": "<<values[i]<<" "<<endl;
             cout<<endl;
         } 
 
@@ -111,6 +111,35 @@ class HashTable{
             index = i;
 
         }
+
+        /*
+        Searches the hash table staring at index hash(word)
+        returns True if found and False otherwise
+        Written by Alex Ludwig
+        Language: C++
+        Apple clang version 17.0.0 (clang-1700.4.4.1)
+        Target: arm64-apple-darwin25.3.0
+        */
+        bool findWord(string word) {
+            int index = hash(word);   
+            int start = index;        
+
+            
+            while (values[index] != "???") {
+
+                if (values[index] == word) {
+                    return true; 
+                }
+
+                index = (index + 1) % size; 
+
+                if (index == start) {
+                    break;
+                }
+            }
+
+            return false; 
+        }
 };
 
 /*
@@ -127,13 +156,28 @@ int main(void){
     string word;
     int index;
 
-    cout<<"Please enter 8 words"<<endl;
-    for(int i=0; i<8; i++){
+    cout<<"Please enter 5 words"<<endl;
+    for(int i=0; i<5; i++){
         cin>>word;
         wordHash.search(word, index);
         wordHash.storeWord(word, index);
     }
     wordHash.display();
+
+    while (true) {
+    cout << "\nEnter a word to search (or type '999' to stop): ";
+    cin >> word;
+
+    if (word == "999") {
+        break;
+    }
+
+    if (wordHash.findWord(word)) {
+        cout << word << " FOUND in table." << endl;
+    } else {
+        cout << word << " NOT FOUND." << endl;
+    }
+    }
 
     return 0;
 }

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CS330</title>
+<style>
+  :root {
+    --ink: #1c1c1a;
+    --paper: #faf9f6;
+    --line: #d8d5cc;
+    --accent: #2f4d3a;
+    --muted: #6b675e;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    line-height: 1.5;
+  }
+
+  header {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 64px 24px 32px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  header h1 {
+    font-size: 2rem;
+    font-weight: normal;
+    margin: 0 0 8px;
+    letter-spacing: 0.2px;
+  }
+
+  header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1rem;
+  }
+
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  section {
+    margin-bottom: 48px;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+    font-weight: normal;
+    margin: 0 0 20px;
+    color: var(--ink);
+  }
+
+  .readme-link {
+    display: block;
+    padding: 16px 4px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 1.05rem;
+  }
+
+  .readme-link:hover {
+    color: var(--accent);
+  }
+
+  ul.classes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  ul.classes li {
+    border-bottom: 1px solid var(--line);
+  }
+
+  ul.classes li:first-child {
+    border-top: 1px solid var(--line);
+  }
+
+  ul.classes li a {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 16px 4px;
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 1.05rem;
+  }
+
+  ul.classes li a:hover {
+    color: var(--accent);
+  }
+
+  ul.classes li a .arrow {
+    font-family: Arial, sans-serif;
+    color: var(--muted);
+  }
+
+  .user-badge {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    font-family: Georgia, serif;
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-align: right;
+   }
+
+  footer {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px 48px;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  a.back {
+    display: inline-block;
+    margin-bottom: 24px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+
+  a.back:hover {
+    color: var(--accent);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="back" href="../../">&#8592; Homework</a>
+  <h1>CS330</h1>
+</header>
+
+<main>
+  <section>
+    <h2>Homework 1:</h2>
+    <ul class="classes">
+      <li>
+        <a href="hello_world_c">
+          <span>Hello World Program - Source Code</span>
+          <span class="arrow">&#8594;</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+</main>
+
+</body>
+<div class="user-badge">
+  Alexander Ludwig<br>
+  ludwiga
+</div>
+</html>

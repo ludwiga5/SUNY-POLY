@@ -1,0 +1,4 @@
+--- Test Case 1: Multi Thread Processing ---
+Current elapsed time is 9 seconds, 5887 microseconds
+--- Test Case 2: Single Thread Processing ---
+Current elapsed time is 35 seconds, 892565 microseconds

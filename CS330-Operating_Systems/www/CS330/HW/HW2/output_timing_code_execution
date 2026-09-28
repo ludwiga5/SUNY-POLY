@@ -1,0 +1,6 @@
+--- Real Time Use: 5sec sleep ---
+Current elapsed time is 5 seconds, 671 microseconds
+--- Test Case 1: end usec > start usec ---
+Current elapsed time is 3 seconds, 800 microseconds
+--- Test Case 2: end usec < start usec ---
+Current elapsed time is 0 seconds, 2 microseconds
